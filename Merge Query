@@ -1,5 +1,6 @@
 // this query will merge flags when ck & tactic id is same
 // will merge ck when tactic id is same
+// status : in progress
 
 SELECT 
     tactic, 
