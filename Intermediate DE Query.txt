@@ -1,3 +1,5 @@
+//status : testing required
+
 SELECT B.[Resource Type] AS [Request Type],
 A.[CompositeKey] AS [Composite Key],
 B.[Product Name] AS [Indication],
