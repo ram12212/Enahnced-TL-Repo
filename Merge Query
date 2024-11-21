@@ -1,0 +1,20 @@
+// this query will merge flags when ck & tactic id is same
+// will merge ck when tactic id is same
+
+SELECT 
+    tactic, 
+    STRING_AGG(composite, ',' ORDER BY composite) AS composite_merged, 
+    STRING_AGG(flags_grouped, '|' ORDER BY composite) AS flags_merged
+FROM (
+    SELECT 
+        tactic, 
+        composite, 
+        STRING_AGG(flag, ',' ORDER BY flag) AS flags_grouped
+    FROM 
+        intermediate
+    GROUP BY 
+        tactic, 
+        composite
+) AS grouped_data
+GROUP BY 
+    tactic
