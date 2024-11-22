@@ -11,5 +11,6 @@ B.[Wave] AS [Wave ID],
 B.[Actual In Market Date] AS [Deployment Date]
 FROM ent.[ExecutionTactic_Dummy] AS B INNER JOIN ent.[ExecutionTacticFlag_Dummy] AS A
 ON B.[Composite Key] = A.[CompositeKey]
-WHERE 
-    NOT EXISTS (SELECT 1 FROM ent.[Intermediate_DE] C WHERE C.[Tactic ID] = B.[Tactic ID] AND C.[Composite Key] = B.[Composite Key] AND C.[Target Flag Name] = A.[FlagValue])
+WHERE B.[Vendor] != 'Salesforce Marketing Cloud'
+AND A.[ExecutionTacticFlagStatus] = 'Y'
+AND NOT EXISTS (SELECT 1 FROM ent.[Intermediate_DE] C WHERE C.[Tactic ID] = B.[Tactic ID] AND C.[Composite Key] = B.[Composite Key] AND C.[Target Flag Name] = A.[FlagValue] AND C.[Processed Flag Status] = 'True')
